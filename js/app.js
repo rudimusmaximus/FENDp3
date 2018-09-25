@@ -4,13 +4,13 @@
  * for properties and methods for update() and render()
  */
 class Enemy {
-  constructor(x, y) {
-    // Variables applied to each of our instances go here,
-    this.x = x*101;
-    this.y = y*83;
-    // The image/sprite for our enemies, this uses
-    // a helper we've provided to easily load images
+  constructor() {// Variables applied to each of our instances go here,
+    // The image/sprite for our enemies, this uses a helper we've provided to easily load images
+    this.xMovement = 101;//distance between blocks horizontally
+    this.yMovement = 83;//distance between blocks vertically
     this.sprite = 'images/enemy-bug.png';
+    this.x = 0;
+    this.y =  (2+this.yMovement) - 25;
   }
 /**
    * @description Enemy class method that updates the
@@ -24,9 +24,13 @@ class Enemy {
     // which will ensure the game runs at the same speed for
     // all computers.
     // if not passed the boundary edge
-      // advance forward
-        //x is incremented by speed * dt
-    //else reset to starting position
+    if(this.x < this.xMovement * 5){
+      // advance forward - is incremented by speed * dt
+      this.x += 200 * dt;
+    } else {
+      //else reset to starting position
+      this.x = - this.xMovement;
+    }
   }
   /**
    * @description Enemy class method that draws the enemy
@@ -148,7 +152,7 @@ class Player {
  * Now instantiate your objects. Array for allEnemies
  * object for player
  */
-var allEnemies = [new Enemy(0,3), new Enemy(0,2), new Enemy(0,1)];
+var allEnemies = [new Enemy(), new Enemy(), new Enemy()];
 var player = new Player();
 /*
  * This listens for key presses and sends the keys to your
