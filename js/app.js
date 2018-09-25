@@ -6,14 +6,14 @@
 class Enemy {
   constructor(x, y) {
     // Variables applied to each of our instances go here,
-    this.x = x;
-    this.y = y;
+    this.x = x*101;
+    this.y = y*83;
     // The image/sprite for our enemies, this uses
     // a helper we've provided to easily load images
     this.sprite = 'images/enemy-bug.png';
   }
-  /**
-   * @description Player class method that updates the
+/**
+   * @description Enemy class method that updates the
    * enemy's position, required method for game
    * //TODO: proper jsdoc Parameter: dt, a time delta between ticks
    */
@@ -23,9 +23,13 @@ class Enemy {
     // You should multiply any movement by the dt parameter
     // which will ensure the game runs at the same speed for
     // all computers.
+    // if not passed the boundary edge
+      // advance forward
+        //x is incremented by speed * dt
+    //else reset to starting position
   }
   /**
-   * @description Player class method that draws the enemy
+   * @description Enemy class method that draws the enemy
    * on the screen, required method for game
    */
   render() {
@@ -40,10 +44,14 @@ class Enemy {
  * a handleInput()
  */
 class Player {
-  constructor(x, y) {
+  constructor() {
     this.sprite = 'images/char-pink-girl.png';
-    this.x = x;
-    this.y = y;
+    this.xMovement = 101;//distance between blocks horizontally
+    this.yMovement = 83;//distance between blocks vertically
+    this.startX = this.xMovement * 2;
+    this.startY = (this.yMovement * 5) - 20;
+    this.x = this.startX;
+    this.y = this.startY;
     this.collideState = false;
     this.winState = false;
   }
@@ -95,27 +103,36 @@ class Player {
    */
   handleInput(keyupMovementString) {
     console.log('arrow key input handled…');
-    //TODO: updates
-    let nextX, nextY = 0;
+    //add the + or - movement to the player object property coordinate
     switch (keyupMovementString) {
       case 'left':
-        nextX = -1;
+        if (this.x > 0){
+          this.x -= this.xMovement;
+        }
         break;
       case 'up':
-        nextY = 1;
+        if (this.y >0){
+          this.y -= this.yMovement;
+        }
+        //TODO: decide if making it into water is win vs making it to the water
+      // //handle for adjustment and water row
+      //   if (this.y > this.yMovement){
+      //     this.y -= this.yMovement;
+      //   }
         break;
       case 'right':
-        nextX = 1;
+        if (this.x < this.xMovement * 4){
+          this.x += this.xMovement;
+        }
         break;
       case 'down':
-        nextY = -1;
+        if(this.y < this.yMovement * 4){
+          this.y += this.yMovement;
+        }
         break;
       default:
         break;
     } //end switch
-    //add the + or - movement to the player object property coordinate
-    this.x += nextX;
-    this.y += nextY;
   } //end handleInput
   /**
    * @description Player class method that
@@ -131,8 +148,8 @@ class Player {
  * Now instantiate your objects. Array for allEnemies
  * object for player
  */
-var allEnemies = [new Enemy(), new Enemy(), new Enemy()];
-var player = new Player(5, 6);
+var allEnemies = [new Enemy(0,3), new Enemy(0,2), new Enemy(0,1)];
+var player = new Player();
 /*
  * This listens for key presses and sends the keys to your
  * Player.handleInput() method. You don't need to modify this.
