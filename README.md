@@ -2,7 +2,7 @@
 Just load a game and play with keyboard arrows, so you need a web browser and a keyboard.
 
 ## To Load A Game
-Simply load the index.html file by clicking here `//TODO: hosted github pages link when ready`
+Simply load the index.html file by clicking [https://rudimusmaximus.github.io/FENDp3/](https://rudimusmaximus.github.io/FENDp3/)
 
 ## To Play A Game
 "In this game you have a Player and Enemies (bugs). The goal of the player is to reach the water, without colliding into any one of the enemies.
@@ -32,24 +32,19 @@ For detailed instructions on how to get started, check out this [guide](https://
 | Area | Comments |
 | :--- | :--- |
 | 1. Issues | a. GitHub disables issues for forked repositories. b. Options are to use an out of sync GitKraken Glow board or c. use pseudo code and `//TODO:` markers to track changes and notes rather than issues d. I will build the rest of the projects from scratch so i can use my usual approach with config and issue templates which are included here. Because I want to keep these for notes and use issues over time, I deleted by p3 fork and started from downloaded files. P2 will be the only submission of mine to use forked repo to start. P3 - end will create standalone repos. |
-| 2. topic | a. notes TODO: update |
-| 3. topic | a. notes TODO: update |
-| 4. topic | a. notes TODO: update |  
+| 2. How would we make this mobile | a. ask on submission |
+| 3. What are accessiblity conscerns for games | a. research item |
 
-**Example for Lesson TODO: notes**
-```
-//placeholder
-```
 ## Assumptions required to solve the problem
 The following assumptions were made by evaluation the code and all given instructions:
  - most of our solution can be done in app.js
 
  - ES6 is ok to use without transpiling with Babel
 
- - TODO: more?
+ - We are only solving for keyboard user
 
 ## Work Flow
-I followed git commit guidelines, a 'Git Flow' branching model committing into develop until ready to test hosting and GitHub hosting. The repo is a fork hosted on GitHub. I used Atom and GitKraken with a Chrome browser for testing.
+I followed git commit guidelines, a 'Git Flow' branching model committing into develop until ready to test hosting and GitHub hosting. The repo was initially a fork hosted on GitHub, but decided to start over using downloaded baseline and standalone repo so I could have issues later. I used Atom and GitKraken with a Chrome browser for testing.
 
 My focus is to catch up in the course, so I'm going to try to stick only to the requirements.
 
@@ -61,3 +56,6 @@ See develop for commit history with git commit style followed. Releases made to 
 I read [Mathew Cranford's Arcade Game Walkthrough](https://matthewcranford.com/arcade-game-walkthrough-part-1-starter-code-breakdown/) series parts 1 - 6 whenever I got stuck.
 I used this article as starting point to make my own [Modal in Pure ES6](https://lowrey.me/modals-in-pure-es6-javascript/).
 I added a resource image from the web 'winner.gif', so my modal would load faster see issue # 1 comments for link.
+CSS and HTML Validators were used.
+https://jigsaw.w3.org/css-validator/
+https://validator.w3.org/#validate_by_input
