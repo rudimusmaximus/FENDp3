@@ -4,13 +4,17 @@
  * for properties and methods for update() and render()
  */
 class Enemy {
-  constructor() {// Variables applied to each of our instances go here,
+  constructor(startColumn, bugRow, speed) {// Variables applied to each of our instances go here,
     // The image/sprite for our enemies, this uses a helper we've provided to easily load images
     this.xMovement = 101;//distance between blocks horizontally
     this.yMovement = 83;//distance between blocks vertically
     this.sprite = 'images/enemy-bug.png';
-    this.x = 0;
-    this.y =  (2+this.yMovement) - 25;
+    this.speed = speed;
+    this.x = 0+((startColumn-1)*this.xMovement);
+    //half height plus offset puts in row 2 (1st of 3 stone)
+    //account for desired starting row
+    this.y =  (41.5+20)+((bugRow-1)*this.yMovement);
+
   }
 /**
    * @description Enemy class method that updates the
@@ -26,7 +30,7 @@ class Enemy {
     // if not passed the boundary edge
     if(this.x < this.xMovement * 5){
       // advance forward - is incremented by speed * dt
-      this.x += 200 * dt;
+      this.x += this.speed * dt;
     } else {
       //else reset to starting position
       this.x = - this.xMovement;
@@ -118,11 +122,6 @@ class Player {
         if (this.y >0){
           this.y -= this.yMovement;
         }
-        //TODO: decide if making it into water is win vs making it to the water
-      // //handle for adjustment and water row
-      //   if (this.y > this.yMovement){
-      //     this.y -= this.yMovement;
-      //   }
         break;
       case 'right':
         if (this.x < this.xMovement * 4){
@@ -152,7 +151,7 @@ class Player {
  * Now instantiate your objects. Array for allEnemies
  * object for player
  */
-var allEnemies = [new Enemy(), new Enemy(), new Enemy()];
+var allEnemies = [new Enemy(1,1,300), new Enemy(-2,2,350), new Enemy(0,3,425)];
 var player = new Player();
 /*
  * This listens for key presses and sends the keys to your
