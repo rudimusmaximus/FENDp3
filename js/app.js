@@ -71,7 +71,7 @@ class Player {
     } else {
       if(this.isVictorious()){
         this.winState = true;
-        console.log('show win modal');
+        this.showWinModal();
       }
     }
   }
@@ -152,7 +152,36 @@ class Player {
     this.x = this.startX;
     this.y = this.startY;
   }
+  /**
+   * @description Player class method that
+   * shows the win modal
+   */
+  showWinModal() {
+    const modal = new Modal(document.querySelector('.modal-overlay'));
+    window.openModal = modal.open.bind(modal);
+    window.openModal();
+  }
 } //end class Player
+
+class Modal {
+  constructor(overlay) {
+    this.overlay = overlay;
+    const closeButton = overlay.querySelector('.button-close')
+    closeButton.addEventListener('click', this.close.bind(this));
+    overlay.addEventListener('click', e => {
+      if (e.srcElement.id === this.overlay.id) {
+        this.close();
+      }
+    });
+  }
+  open() {
+    this.overlay.classList.remove('is-hidden');
+  }
+
+  close() {
+    this.overlay.classList.add('is-hidden');
+  }
+}
 
 /*
  * Now instantiate your objects. Array for allEnemies
