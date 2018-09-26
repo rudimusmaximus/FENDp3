@@ -55,7 +55,12 @@ var Engine = (function(global) {
         /* Use the browser's requestAnimationFrame function to call this
          * function again as soon as the browser is able to draw another frame.
          */
-        win.requestAnimationFrame(main);
+         //end game when it has been won
+         if(player.winState === true){
+           console.log('WINNER! GAME OVER!')
+         } else {
+           win.requestAnimationFrame(main);
+         }
     }
 
     /* This function does some initial setup that should only occur once,
