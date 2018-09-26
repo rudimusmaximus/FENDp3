@@ -59,6 +59,7 @@ class Player {
     this.x = this.startX;
     this.y = this.startY;
     this.winState = false;
+    this.winImageName = 'winner.gif';
   }
   /**
    * @description Player class method that
@@ -157,7 +158,10 @@ class Player {
  * Now instantiate your objects. Array for allEnemies
  * object for player
  */
-var allEnemies = [new Enemy(1,1,300), new Enemy(-2,2,350), new Enemy(0,3,425)];
+var allEnemies = [new Enemy(0,1,300),
+                  new Enemy(-3,2,350),
+                  new Enemy(0,2,350),
+                  new Enemy(-1,3,425)];
 var player = new Player();
 /*
  * This listens for key presses and sends the keys to your
