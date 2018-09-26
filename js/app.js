@@ -59,7 +59,7 @@ class Player {
     this.x = this.startX;
     this.y = this.startY;
     this.winState = false;
-    this.winImageName = 'winner.gif';
+    this.winImageName = 'images/winner.gif';
   }
   /**
    * @description Player class method that
