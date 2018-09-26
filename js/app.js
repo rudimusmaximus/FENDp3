@@ -13,8 +13,8 @@ class Enemy {
     this.x = 0+((startColumn-1)*this.xMovement);
     //half height plus offset puts in row 2 (1st of 3 stone)
     //account for desired starting row
-    this.y =  (41.5+20)+((bugRow-1)*this.yMovement);
-
+    this.yMargin = (41.5+20);
+    this.y =  this.yMargin+((bugRow-1)*this.yMovement);
   }
 /**
    * @description Enemy class method that updates the
@@ -22,8 +22,6 @@ class Enemy {
    * //TODO: proper jsdoc Parameter: dt, a time delta between ticks
    */
   update(dt) {
-    console.log('updating enemy…');
-    //TODO: updates
     // You should multiply any movement by the dt parameter
     // which will ensure the game runs at the same speed for
     // all computers.
@@ -41,7 +39,6 @@ class Enemy {
    * on the screen, required method for game
    */
   render() {
-    console.log('enemy render…');
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
   }
 } //end class Enemy
@@ -57,19 +54,26 @@ class Player {
     this.xMovement = 101;//distance between blocks horizontally
     this.yMovement = 83;//distance between blocks vertically
     this.startX = this.xMovement * 2;
-    this.startY = (this.yMovement * 5) - 20;
+    this.yMargin = (41.5+20);
+    this.startY = this.yMargin+(this.yMovement * 4);
     this.x = this.startX;
     this.y = this.startY;
-    this.collideState = false;
     this.winState = false;
+    this.winImageName = 'images/winner.gif';
   }
   /**
    * @description Player class method that
    * updates the player position
    */
-  update(dt) { //TODO: call does not pass dt, why wouldn't we need if enemy does?
-    console.log('updating player…');
-    //TODO: same as enemy updates?
+  update() {
+    if (this.hasCollided()){
+      this.reset();
+    } else {
+      if(this.isVictorious()){
+        this.winState = true;
+        this.showWinModal();
+      }
+    }
   }
   /**
    * @description Player class method that
@@ -77,22 +81,27 @@ class Player {
    * @returns {boolean} true if 'has collided'false otherwise
    */
   hasCollided() {
-    console.log('collision check…');
-    return false; //TODO: updates
+    for(let enemy of allEnemies){
+      if (this.y === enemy.y){
+        if(this.x < enemy.x + enemy.xMovement/2 &&
+          enemy.x < this.x + this.xMovement/2){
+          return true;
+        }
+      }
+    }
+    return false;
   }
   /**
    * @description Player class method that
-   * checks win state if at top row, returns true
+   * checks win state if in water, returns true
    * @returns {boolean} true if in win state, false otherwise
    */
   isVictorious() {
-    console.log('win state check…');
-    if (this.y === 0) {
-      console.log('you won'); //open win modal
+    if (this.y === -21.5) {
       return true;
     } else {
       return false;
-    } //TODO: updates
+    }
   }
   /**
    * @description Player class method that
@@ -100,7 +109,6 @@ class Player {
    * coordinate position
    */
   render() {
-    console.log('player render…');
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
   }
   /**
@@ -110,7 +118,6 @@ class Player {
    * @param {string} keyupMovementString left, up, right or down
    */
   handleInput(keyupMovementString) {
-    console.log('arrow key input handled…');
     //add the + or - movement to the player object property coordinate
     switch (keyupMovementString) {
       case 'left':
@@ -142,16 +149,48 @@ class Player {
    * updates the player position back to the starting point
    */
   reset() {
-    console.log('updating player…');
-    //TODO:what are the starting coord also for instantiating
+    this.x = this.startX;
+    this.y = this.startY;
+  }
+  /**
+   * @description Player class method that
+   * shows the win modal
+   */
+  showWinModal() {
+    const modal = new Modal(document.querySelector('.modal-overlay'));
+    window.openModal = modal.open.bind(modal);
+    window.openModal();
   }
 } //end class Player
+
+class Modal {
+  constructor(overlay) {
+    this.overlay = overlay;
+    const closeButton = overlay.querySelector('.button-close')
+    closeButton.addEventListener('click', this.close.bind(this));
+    overlay.addEventListener('click', e => {
+      if (e.srcElement.id === this.overlay.id) {
+        this.close();
+      }
+    });
+  }
+  open() {
+    this.overlay.classList.remove('is-hidden');
+  }
+
+  close() {
+    this.overlay.classList.add('is-hidden');
+  }
+}
 
 /*
  * Now instantiate your objects. Array for allEnemies
  * object for player
  */
-var allEnemies = [new Enemy(1,1,300), new Enemy(-2,2,350), new Enemy(0,3,425)];
+var allEnemies = [new Enemy(0,1,300),
+                  new Enemy(-3,2,350),
+                  new Enemy(0,2,350),
+                  new Enemy(-1,3,425)];
 var player = new Player();
 /*
  * This listens for key presses and sends the keys to your

@@ -55,4 +55,9 @@ My focus is to catch up in the course, so I'm going to try to stick only to the 
 
 Now to finish in time! Thanks for reading this.
 
-See develop for commit history with git commit style followed. Releases made to master and develop with tags on master following semantic versioning.
+See develop for commit history with git commit style followed. Releases made to master and develop with tags on master following [Semantic Versioning 2.0.0](https://semver.org/).
+
+## Resources used to complete this work
+I read [Mathew Cranford's Arcade Game Walkthrough](https://matthewcranford.com/arcade-game-walkthrough-part-1-starter-code-breakdown/) series parts 1 - 6 whenever I got stuck.
+I used this article as starting point to make my own [Modal in Pure ES6](https://lowrey.me/modals-in-pure-es6-javascript/).
+I added a resource image from the web 'winner.gif', so my modal would load faster see issue # 1 comments for link.
