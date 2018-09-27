@@ -1,3 +1,4 @@
+'use strict';
 /**
  * @description ES6 style class for enemies our player must avoid
  * with constructor placeholder
